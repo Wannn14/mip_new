@@ -99,26 +99,28 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-center font-tree fw-bold mt-4">
+                  <div id="target-date" data-target="2025-04-11T14:00:00"></div>
                     <span class="p-2">
                         <div class="shadow p-time py-2 mb-5 bg-default rounded-default text-white">
-                            <h5 class="card-title text-center">03</h5>
+                            <h5 class="card-title text-center" id="days">00</h5>
                             <p class="card-text text-center" style="margin-top: -10px;">Hari</p></div>
                     </span>
                     <span class="p-2">
                         <div class="shadow p-time py-2 mb-5 bg-default rounded-default text-white">
-                            <h5 class="card-title text-center">12</h5>
+                            <h5 class="card-title text-center" id="hours">00</h5>
                             <p class="card-text text-center" style="margin-top: -10px;">Jam</p></div>
                     </span>
                     <span class="p-2">
                         <div class="shadow p-time py-2 mb-5 bg-default rounded-default text-white">
-                            <h5 class="card-title text-center">60</h5>
+                            <h5 class="card-title text-center" id="minutes">00</h5>
                             <p class="card-text text-center" style="margin-top: -10px;">Menit</p></div>
                     </span>
                     <span class="p-2">
                         <div class="shadow p-time py-2 mb-5 bg-default rounded-default text-white">
-                            <h5 class="card-title text-center">45</h5>
+                            <h5 class="card-title text-center" id="seconds">00</h5>
                             <p class="card-text text-center" style="margin-top: -10px;">Detik</p></div>
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1040,16 +1042,16 @@
             <source src="tes2.mp3" type="audio/mp3">
         </audio>
 
-        <button id="playPauseBTN" class="btn btn-audio" onclick="playPause()">
+        <!-- <button id="playPauseBTN" class="btn btn-audio" onclick="playPause()">
             <label for="click" class="label-box">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-play-circle icon-chatbox" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
                 </svg>
             </label>
-        </button>
+        </button> -->
 
-        <script>
+        <!-- <script>
             var audio = document.getElementById('audio');
             var playPauseBTN = document.getElementById('playPauseBTN');
             var count = 0;
@@ -1069,7 +1071,7 @@
                 audio.pause();
                 audio.currentTime = 0
             }
-        </script>
+        </script> -->
     </section>
 
     <br><br><br>
@@ -1117,6 +1119,52 @@
             $('#ucapan').on('activate.bs.scrollspy')
         });
     </script>
+
+<script>
+  // Get target date from HTML
+  const targetDateElement = document.getElementById('target-date');
+  const targetDateString = targetDateElement.getAttribute('data-target');
+  const targetDate = new Date(targetDateString);
+  
+  // Get countdown elements
+  const daysElement = document.getElementById('days');
+  const hoursElement = document.getElementById('hours');
+  const minutesElement = document.getElementById('minutes');
+  const secondsElement = document.getElementById('seconds');
+  
+  // Update countdown every second
+  function updateCountdown() {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+      
+      if (difference <= 0) {
+          // Countdown finished
+          daysElement.textContent = '00';
+          hoursElement.textContent = '00';
+          minutesElement.textContent = '00';
+          secondsElement.textContent = '00';
+          return;
+      }
+      
+      // Calculate time units
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      
+      // Update the display
+      daysElement.textContent = String(days).padStart(2, '0');
+      hoursElement.textContent = String(hours).padStart(2, '0');
+      minutesElement.textContent = String(minutes).padStart(2, '0');
+      secondsElement.textContent = String(seconds).padStart(2, '0');
+  }
+  
+  // Initial call
+  updateCountdown();
+  
+  // Update every second
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 
 </html>
