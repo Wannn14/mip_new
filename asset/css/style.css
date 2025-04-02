@@ -1,9 +1,5 @@
 body{
-    background-color: #FAECE0;
-}
-
-.componen-one{
-    /* width: 10rem; */
+    background-color: white;
 }
 
 .img-u-berdua{
@@ -33,7 +29,7 @@ body{
 }
 
 .bg-default{
-    background-color:#5F5F21;
+    background-color:#87ceeb;
 }
 
 .bg-pjk{
@@ -72,7 +68,7 @@ body{
     background-color: #fff;
     color: #5F5F21;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    pacity: 0.6;
+    opacity: 0.6;
     transition: 0.3s;
 }
 
@@ -887,6 +883,6 @@ span.love-mt-2{
     .font-size-55{
         font-size: 30px;
     }
-}
 
-
+    
+}}
